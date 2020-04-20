@@ -45,7 +45,7 @@ If you add to your main file some new keys with texts (or added automatically wi
 }
 ```
 
-Result `ew_al.json` (Keys that were missing from the first file where added without overwritting the translations):
+Result `new_al.json` (Keys that were missing from the first file where added without overwritting the translations):
 
 ```
 {
