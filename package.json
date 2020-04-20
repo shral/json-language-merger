@@ -1,0 +1,21 @@
+{
+  "name": "json-language-merger",
+  "version": "1.0.1",
+  "description": "Merge angular language JSON-files",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "json",
+    "merge",
+    "angular",
+    "localizer",
+    "i18n"
+  ],
+  "author": "Shefki Esadi",
+  "license": "MIT",
+  "bin":{
+  	"json-language-merger":"./index.js"
+  }
+}
