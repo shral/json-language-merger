@@ -1,6 +1,6 @@
 {
   "name": "json-language-merger",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Merge angular language JSON-files",
   "main": "index.js",
   "scripts": {
@@ -17,5 +17,9 @@
   "license": "MIT",
   "bin":{
   	"json-language-merger":"./index.js"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/shral/json-language-merger/issues"
+  },
+  "homepage": "https://github.com/shral/json-language-merger#readme"
 }

@@ -10,33 +10,36 @@ var process = require("process");
 
 var workingPath = getPathArgument();
 workingPath.objectPath = workingPath.objectPath || 'translations';
+if(workingPath.firstFile && workingPath.secondFile){
+  fs.readFile(workingPath.firstFile, 'utf8', function (err,firstFile) {
+      fs.readFile(workingPath.secondFile, 'utf8', function (err,secondFile) {
+          var firstContent = JSON.parse(firstFile);
+          var cecondContent = JSON.parse(secondFile);
+          var tempObject = {};
+          var sorted = {};
+          Object.keys(firstContent[workingPath.objectPath]).forEach(key=>{
+            tempObject[key] = firstContent[workingPath.objectPath][key];
+          });
+          Object.keys(cecondContent[workingPath.objectPath]).forEach(key=>{
+            tempObject[key] = cecondContent[workingPath.objectPath][key];
+          });
+          Object.keys(tempObject).sort().forEach(key=>{
+              sorted[key] = tempObject[key];
+          });
+          cecondContent[workingPath.objectPath] = sorted;
 
-fs.readFile(workingPath.firstFile, 'utf8', function (err,firstFile) {
-    fs.readFile(workingPath.secondFile, 'utf8', function (err,secondFile) {
-        var firstContent = JSON.parse(firstFile);
-        var cecondContent = JSON.parse(secondFile);
-        var tempObject = {};
-        var sorted = {};
-        Object.keys(firstContent[workingPath.objectPath]).forEach(key=>{
-          tempObject[key] = firstContent[workingPath.objectPath][key];
-        });
-        Object.keys(cecondContent[workingPath.objectPath]).forEach(key=>{
-          tempObject[key] = cecondContent[workingPath.objectPath][key];
-        });
-        Object.keys(tempObject).sort().forEach(key=>{
-            sorted[key] = tempObject[key];
-        });
-        cecondContent[workingPath.objectPath] = sorted;
-
-        if (err) {
-            return console.log(err);
-        }
-        const resultFile = workingPath.resultFile || "result.json";
-        fs.writeFile(resultFile, JSON.stringify(cecondContent, null, 2), 'utf8', function (err) {
-        if (err) return console.log(err);
-        });
-    })
-})
+          if (err) {
+              return console.log(err);
+          }
+          const resultFile = workingPath.resultFile || "result.json";
+          fs.writeFile(resultFile, JSON.stringify(cecondContent, null, 2), 'utf8', function (err) {
+          if (err) return console.log(err);
+          });
+      })
+  })
+}else{
+  console.log("You have to define the first and second file path!")
+}
 
 // }
 
