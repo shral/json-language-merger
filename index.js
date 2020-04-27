@@ -8,30 +8,36 @@
 var fs = require('fs');
 var process = require("process");
 
-var workingPath = getPathArgument();
-workingPath.objectPath = workingPath.objectPath || 'translations';
-if(workingPath.firstFile && workingPath.secondFile){
-  fs.readFile(workingPath.firstFile, 'utf8', function (err,firstFile) {
-      fs.readFile(workingPath.secondFile, 'utf8', function (err,secondFile) {
+var param = getPathArgument();
+param.objectPath = param.objectPath || 'translations';
+if(param.firstFile && param.secondFile){
+  fs.readFile(param.firstFile, 'utf8', function (err,firstFile) {
+      fs.readFile(param.secondFile, 'utf8', function (err,secondFile) {
           var firstContent = JSON.parse(firstFile);
           var cecondContent = JSON.parse(secondFile);
           var tempObject = {};
           var sorted = {};
-          Object.keys(firstContent[workingPath.objectPath]).forEach(key=>{
-            tempObject[key] = firstContent[workingPath.objectPath][key];
+          Object.keys(firstContent[param.objectPath]).forEach(key=>{
+            tempObject[key] = firstContent[param.objectPath][key];
           });
-          Object.keys(cecondContent[workingPath.objectPath]).forEach(key=>{
-            tempObject[key] = cecondContent[workingPath.objectPath][key];
+          Object.keys(cecondContent[param.objectPath]).forEach(key=>{
+            if(param.forceFirstFile){
+              if(tempObject[key]){
+                tempObject[key] = cecondContent[param.objectPath][key];
+              }
+            }else{
+              tempObject[key] = cecondContent[param.objectPath][key];
+            }
           });
           Object.keys(tempObject).sort().forEach(key=>{
               sorted[key] = tempObject[key];
           });
-          cecondContent[workingPath.objectPath] = sorted;
+          cecondContent[param.objectPath] = sorted;
 
           if (err) {
               return console.log(err);
           }
-          const resultFile = workingPath.resultFile || "result.json";
+          const resultFile = param.resultFile || "result.json";
           fs.writeFile(resultFile, JSON.stringify(cecondContent, null, 2), 'utf8', function (err) {
           if (err) return console.log(err);
           });
@@ -58,6 +64,9 @@ function getPathArgument(){
       }
       if(p.indexOf("--objectPath") > -1){
         result["objectPath"] = p.replace(/--objectPath=/,"");
+      }
+      if(p.indexOf("--forceFirstFile") > -1){
+        result["forceFirstFile"] = p.replace(/--forceFirstFile=/,"");
       }
     })
     console.log("result",result);
