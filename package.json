@@ -1,6 +1,6 @@
 {
   "name": "json-language-merger",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Merge angular language JSON-files",
   "main": "index.js",
   "scripts": {
