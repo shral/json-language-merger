@@ -64,4 +64,4 @@ Result `new_al.json` (Keys that were missing from the first file where added wit
 }
 ```
 
-If you want that new keys that are comming in the second file (and are not in the first file) should be ignored, you should set the parameter `--forceFirstFile=true`
+If you want that new keys that are comming in the second file (and are not in the first file) should be ignored, you should set the parameter `--forceFirstFile=true`.
