@@ -1,6 +1,8 @@
 # json-language-merger
 Tool for merging and sorting (language) JSON-files
 
+(Implemented while working for [j4care.com](https://www.j4care.com/) on [dcm4chee-arc-light](https://github.com/dcm4che/dcm4chee-arc-light) UI2 project).
+
 ### Use Case Scenario
 If you internationalize your app, you mey have a JSON file with the keys (that are used in your code) and the text to those keys.
 
