@@ -15,6 +15,10 @@ If you add to your main file some new keys with texts (or added automatically wi
 ```
   node index.js --firstFile=./lang/default_en.json --secondFile=./lang/al.json --resultFile=./lang/new_al.json --objectPath=translations
 ```
+### Adding the new keys from newkeys.json to new_en.json based on en.json
+```
+node index.js --firstFile=./lang/en.json --secondFile=./lang/newkeys.json --resultFile=./lang/new_en.json --objectPath=translations
+```
 `default_en.json` main JSON-file, probably generated automatically by extracting all textes from your code that are marked:
 
 ```
